@@ -81,7 +81,33 @@ services:
       - 443:443
       - 80:80
       - 8000:8000 # wss proxied to nwaku
+  prometheus:
+    image: prom/prometheus:v2.36.2
+    user: '1000:1000'
+    networks:
+      - relayer
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - ./prometheus/data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
 
+  grafana:
+    image: grafana/grafana
+    user: '1000:1000'
+    networks:
+      - relayer
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/config:/etc/grafana/
+    restart: always
+
+  
 secrets:
   MNEMONIC:
     external: true

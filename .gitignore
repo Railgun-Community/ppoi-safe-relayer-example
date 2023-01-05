@@ -1,6 +1,7 @@
 # Node
 node_modules
 yarn.lock
+package-lock.json
 
 # Log files
 npm-debug.log*
@@ -39,3 +40,11 @@ docker/config.toml
 docker/docker-stack.yml
 docker/appdata
 docker/custom.yml
+docker/prometheus/data/*
+docker/grafana/data/*
+
+# Exceptions
+
+!docker/prometheus/data/.gitkeep
+!docker/grafana/data/.gitkeep
+

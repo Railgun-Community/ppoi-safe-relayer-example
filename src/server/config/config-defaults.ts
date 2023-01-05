@@ -143,6 +143,18 @@ export default {
       .div(10000),
   },
 
+  monitoring: {
+    /**
+     * Enables prometheus endpoint for monitoring
+     */
+    shouldMonitor: false,
+
+    /**
+     * How often to collect metrics in milliseconds
+     */
+    metricCollectionInterval: 30 * 1000,
+  },
+
   waku: {
     /**
      * URL of nim-waku rpc server (eg http://localhost:8546).

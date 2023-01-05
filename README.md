@@ -55,7 +55,7 @@ configDefaults.networks.active = [
 
 - configDefaults.waku.rpcURL
 
-Specify a waku server to use for your relayer's p2p communication. It defaults to http://localhost:8546.
+Specify a waku server to use for your relayer's p2p communication. It defaults to http://localhost:8546
 
 ```
 configDefaults.waku.rpcURL = 'http://127.0.0.1:8546'
@@ -244,3 +244,14 @@ If you get an error about the `relayer_relayer` network not existing, just execu
 
 - `npm run test`
 - `npm run test-coverage` (with code coverage visualizer)
+
+## Monitoring with prometheus and grafana
+
+- Open port 3000 to the public. This port will be password authenticated, so nobody without the password will be able to see your monitoring
+- Allow monitoring in MY-CONFIG.ts
+
+```
+  configDefaults.monitoring.shouldMonitor = true;
+```
+
+- Set monitoring password in docker/grafana/config/grafana.ini

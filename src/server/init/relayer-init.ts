@@ -14,6 +14,7 @@ import {
   initTopUpPoller,
   stopTopUpPolling,
 } from '../wallets/wallet-top-up-poller';
+import { initMonitoring } from '../monitoring/monitoring';
 
 export const initRelayerModules = async (forTest = false) => {
   if (!forTest) {
@@ -25,6 +26,7 @@ export const initRelayerModules = async (forTest = false) => {
   await Promise.all([initWallets(), initTokens()]);
   initPricePoller();
   initTopUpPoller();
+  initMonitoring();
   logger.log('Relayer ready.');
 };
 

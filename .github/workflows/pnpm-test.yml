@@ -1,5 +1,4 @@
-name: Node.js CI
-
+name: pnpm test
 on:
   push:
     branches: [main]
@@ -8,19 +7,29 @@ on:
 
 jobs:
   unit-tests:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [16]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: '16.6'
-      - run: npm i
-      - run: npm run copy-my-config
-      - run: npm test
+          version: 7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - run: pnpm copy-my-config
+      - name: Run Test
+        run: pnpm test
 
   fail-report:
-    if: ${{ failure() }}
+    if: ${{ failure() && github.ref == 'refs/heads/main' }}
     needs: unit-tests
     runs-on: ubuntu-latest
 

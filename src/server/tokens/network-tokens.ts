@@ -9,13 +9,14 @@ import { removeUndefineds } from '../../util/utils';
 import { logger } from '../../util/logger';
 import { ABI_ERC20 } from '../abi/abi';
 import { RelayerChain } from '../../models/chain-models';
+import { isDefined } from '@railgun-community/quickstart';
 
 export const networkTokens: NumMapType<NumMapType<Token[]>> = {};
 
 export const initTokens = async () => {
   for (const chain of configuredNetworkChains()) {
     const tokensForChain = configTokens[chain.type][chain.id];
-    if (!tokensForChain) {
+    if (!isDefined(tokensForChain)) {
       networkTokens[chain.type] ??= [];
       networkTokens[chain.type][chain.id] = [];
       continue;

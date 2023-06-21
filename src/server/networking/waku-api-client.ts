@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import { formatJsonRpcRequest } from '@walletconnect/jsonrpc-utils';
 import debug from 'debug';
 import { WakuMessage } from '../waku-relayer/waku-message';
+import { isDefined } from '@railgun-community/quickstart';
 
 export type WakuRelayMessage = {
   contentTopic: string;
@@ -57,10 +58,10 @@ export class WakuApiClient {
   async getDebug(): Promise<string[]> {
     const data = await this.request(WakuRequestMethods.DebugInfo, []);
     const { result, error } = data;
-    if (result) {
+    if (isDefined(result)) {
       return result.listenAddresses;
     }
-    if (error) {
+    if (isDefined(error)) {
       this.dbg(error.message);
     }
     return [];
@@ -118,10 +119,10 @@ export class WakuApiClient {
 
     const messages: WakuRelayMessage[] = data.result;
     // if contentTopics given, return only matching messages
-    if (data.error) {
+    if (isDefined(data.error)) {
       throw data.error;
     }
-    if (!messages) {
+    if (!isDefined(messages)) {
       this.dbg('No messages, got data:', data);
       return [];
     }

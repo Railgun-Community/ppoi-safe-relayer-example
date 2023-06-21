@@ -14,6 +14,7 @@ import { NetworkChainID } from '../config/config-chains';
 import { getProviderForNetwork } from '../providers/active-network-providers';
 import { getStandardGasDetails } from './gas-by-speed';
 import configDefaults from '../config/config-defaults';
+import { isDefined } from '@railgun-community/quickstart';
 
 export const getEstimateGasDetailsPublic = async (
   chain: RelayerChain,
@@ -31,7 +32,7 @@ export const getEstimateGasDetailsPublic = async (
     return { gasEstimate, ...gasDetails };
   } catch (err) {
     logger.error(err);
-    if (devLog) {
+    if (isDefined(devLog) && devLog) {
       throw sanitizeRelayerError(err);
     }
     throw new Error(ErrorMessage.GAS_ESTIMATE_ERROR);
@@ -85,7 +86,7 @@ export const getEstimateGasDetailsRelayed = async (
       );
     }
     logger.error(err);
-    if (devLog) {
+    if (isDefined(devLog) && devLog) {
       throw sanitizeRelayerError(err);
     }
     throw new Error(ErrorMessage.GAS_ESTIMATE_ERROR);

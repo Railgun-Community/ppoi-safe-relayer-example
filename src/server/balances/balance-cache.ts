@@ -7,6 +7,7 @@ import { getGasTokenBalance } from './gas-token-balance';
 import { ActiveWallet } from '../../models/wallet-models';
 import { logger } from '../../util/logger';
 import { RelayerChain } from '../../models/chain-models';
+import { isDefined } from '@railgun-community/quickstart';
 
 type CachedBalance = {
   balance: BigNumber;
@@ -56,7 +57,7 @@ export const shouldUpdateCachedGasTokenBalance = (
 ) => {
   gasTokenBalanceCache[chain.type] ??= {};
   gasTokenBalanceCache[chain.type][chain.id] ??= {};
-  if (!gasTokenBalanceCache[chain.type][chain.id][walletAddress]) {
+  if (!isDefined(gasTokenBalanceCache[chain.type][chain.id][walletAddress])) {
     return true;
   }
   const cachedBalance =
@@ -76,7 +77,7 @@ export const getCachedGasTokenBalance = async (
   }
   gasTokenBalanceCache[chain.type] ??= {};
   gasTokenBalanceCache[chain.type][chain.id] ??= {};
-  if (!gasTokenBalanceCache[chain.type][chain.id][walletAddress]) {
+  if (!isDefined(gasTokenBalanceCache[chain.type][chain.id][walletAddress])) {
     throw new Error('No balance found');
   }
   return gasTokenBalanceCache[chain.type][chain.id][walletAddress].balance;

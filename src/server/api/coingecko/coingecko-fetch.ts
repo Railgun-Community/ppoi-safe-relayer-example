@@ -2,6 +2,7 @@ import axios from 'axios';
 import configDefaults from '../../config/config-defaults';
 import { CoingeckoNetworkID } from '../../../models/api-constants';
 import { logger } from '../../../util/logger';
+import { isDefined } from '@railgun-community/quickstart';
 
 export enum CoingeckoApiEndpoint {
   PriceLookupByID = 'simple/price/',
@@ -9,7 +10,7 @@ export enum CoingeckoApiEndpoint {
 }
 
 const coingeckoApiUrl = (): string => {
-  return coingeckoProApiKey()
+  return isDefined(coingeckoProApiKey()) && coingeckoProApiKey() !== ''
     ? 'https://pro-api.coingecko.com/api/v3/'
     : 'https://api.coingecko.com/api/v3/';
 };
@@ -25,7 +26,7 @@ const paramString = (params?: MapType<any>) => {
   const searchParams = new URLSearchParams(params);
 
   const proApiKey = coingeckoProApiKey();
-  if (proApiKey) {
+  if (isDefined(proApiKey) && proApiKey !== '') {
     searchParams.append('x_cg_pro_api_key', proApiKey);
   }
 
@@ -62,7 +63,7 @@ export const getCoingeckoData = async (
   } catch (err) {
     logger.warn(`getCoingeckoData error: ${err.message}`);
     if (
-      !retryCount ||
+      !isDefined(retryCount) ||
       retryCount < configDefaults.tokenPrices.priceLookupRetries
     ) {
       logger.log('Retrying getCoingeckoData request...');
@@ -70,7 +71,7 @@ export const getCoingeckoData = async (
         endpoint,
         coingeckoNetworkId,
         params,
-        retryCount ? retryCount + 1 : 1,
+        isDefined(retryCount) ? retryCount + 1 : 1,
       );
     }
     throw new Error(err);

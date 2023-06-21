@@ -1,3 +1,4 @@
+import { isDefined } from '@railgun-community/quickstart';
 import { RelayerChain } from '../../models/chain-models';
 import { zeroXUpdatePricesByAddresses } from '../api/0x/0x-price';
 import { coingeckoUpdatePricesByAddresses } from '../api/coingecko/coingecko-price';
@@ -53,7 +54,7 @@ const tokenPriceRefresherCoingecko = (
   const network = configNetworks[chain.type][chain.id];
   const { coingeckoNetworkId } = network;
   if (!coingeckoNetworkId) {
-    if (network.isTestNetwork) {
+    if (isDefined(network.isTestNetwork) && network.isTestNetwork) {
       updateTestNetworkDefaultPrices(chain, updater);
     }
     return Promise.resolve();
@@ -71,7 +72,7 @@ const tokenPriceRefresherZeroX = (
   tokenAddresses: string[],
 ): Promise<void> => {
   const network = configNetworks[chain.type][chain.id];
-  if (network.isTestNetwork) {
+  if (isDefined(network.isTestNetwork) && network.isTestNetwork) {
     return Promise.resolve();
   }
 

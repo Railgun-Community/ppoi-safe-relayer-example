@@ -14,12 +14,15 @@ import {
   initTopUpPoller,
   stopTopUpPolling,
 } from '../wallets/wallet-top-up-poller';
-import { setOnBalanceUpdateCallback } from '@railgun-community/quickstart';
+import {
+  isDefined,
+  setOnBalanceUpdateCallback,
+} from '@railgun-community/quickstart';
 import { onBalanceUpdateCallback } from '../balances/shielded-balance-cache';
 
 export const initRelayerModules = async (forTest = false) => {
   if (!forTest) {
-    myConfigOverrides && myConfigOverrides();
+    isDefined(myConfigOverrides) && myConfigOverrides();
   }
   initSettingsDB();
   startEngine();

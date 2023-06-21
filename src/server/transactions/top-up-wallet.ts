@@ -23,6 +23,7 @@ import {
 import { removeUndefineds } from '../../util/utils';
 import { RelayerChain } from '../../models/chain-models';
 import debug from 'debug';
+import { isDefined } from '@railgun-community/quickstart';
 
 const dbg = debug('relayer:topup');
 
@@ -87,7 +88,8 @@ export const getTopUpTokenAmountsForChain = async (
       );
       try {
         if (
-          tokenAmountInGasToken.quote?.buyTokenAmount.amount.gt(
+          isDefined(tokenAmountInGasToken.quote) &&
+          tokenAmountInGasToken.quote.buyTokenAmount.amount.gt(
             configDefaults.topUps.swapThresholdIntoGasToken,
           )
         ) {

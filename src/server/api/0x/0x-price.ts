@@ -1,3 +1,4 @@
+import { isDefined } from '@railgun-community/quickstart';
 import { RelayerChain } from '../../../models/chain-models';
 import { delay, promiseTimeout } from '../../../util/promise-utils';
 import { tokenForAddress } from '../../tokens/network-tokens';
@@ -92,7 +93,8 @@ export const zeroXUpdatePricesByAddresses = async (
       zeroXPriceLookupByAddress(chain, tokenAddress),
       10000, // 10 second price fetch timeout
     ).catch((err) => {
-      if (err?.message?.includes('Timed out')) {
+      const errMsg = err?.message as string | undefined;
+      if (isDefined(errMsg) && errMsg.includes('Timed out')) {
         dbg(
           `Token ${tokenAddress} timed out on chain ${chain.type}:${chain.id}`,
         );

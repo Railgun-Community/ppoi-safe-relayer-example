@@ -37,6 +37,7 @@ import {
 import { NetworkChainID } from '../config/config-chains';
 import { getProviderForNetwork } from '../providers/active-network-providers';
 import { web3ProviderFromChainID } from '../providers/web3-providers';
+import { isDefined } from '@railgun-community/quickstart';
 
 // Hack to get the types to apply correctly.
 const Web3Eth = Web3 as unknown as typeof Web3.Eth;
@@ -271,7 +272,7 @@ const getFeeHistory = (
           );
         }
         const headBlock = findHeadBlockInMessage(err.message);
-        if (headBlock) {
+        if (isDefined(headBlock)) {
           return getFeeHistory(web3Eth, headBlock, retryCount + 1);
         }
 

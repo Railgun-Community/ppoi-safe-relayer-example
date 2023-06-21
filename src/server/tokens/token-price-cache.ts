@@ -4,6 +4,7 @@ import { logger } from '../../util/logger';
 import { resetMapObject } from '../../util/utils';
 import { tokenForAddress } from './network-tokens';
 import { RelayerChain } from '../../models/chain-models';
+import { isDefined } from '@railgun-community/quickstart';
 
 export enum TokenPriceSource {
   CoinGecko = 'CoinGecko',
@@ -73,11 +74,11 @@ export const cachedTokenPriceForSource = (
   tokenAddress: string,
 ): Optional<TokenPrice> => {
   const pricesForSource = tokenPriceCache[source];
-  if (!pricesForSource) {
+  if (!isDefined(pricesForSource)) {
     return undefined;
   }
   const cachedNetworkPrices = pricesForSource[chain.type][chain.id];
-  if (!cachedNetworkPrices) {
+  if (!isDefined(cachedNetworkPrices)) {
     logTokenLookupError(`[${source}] No network prices`, chain, tokenAddress);
     return undefined;
   }
@@ -137,7 +138,7 @@ export const lookUpCachedTokenPrice = (
   );
 
   // No price available.
-  if (!cachedPrice) {
+  if (!isDefined(cachedPrice)) {
     logTokenLookupError('NO TOKEN PRICE', chain, tokenAddress);
     throw new Error(`No cached price for token: ${tokenAddress}`);
   }

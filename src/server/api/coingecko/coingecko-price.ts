@@ -1,3 +1,4 @@
+import { isDefined } from '@railgun-community/quickstart';
 import { CoingeckoNetworkID } from '../../../models/api-constants';
 import { TokenPrice, TokenPriceUpdater } from '../../tokens/token-price-cache';
 import { CoingeckoApiEndpoint, getCoingeckoData } from './coingecko-fetch';
@@ -20,7 +21,7 @@ const tokenPriceArrayFromCoingeckoPriceMap = (
 
   Object.keys(coingeckoPriceMap).forEach((tokenAddress) => {
     const coingeckoPriceData = coingeckoPriceMap[tokenAddress];
-    if (!coingeckoPriceData) return; // Token price not found.
+    if (!isDefined(coingeckoPriceData)) return; // Token price not found.
 
     tokenPrices.push({
       tokenAddress,

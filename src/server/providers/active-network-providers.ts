@@ -9,6 +9,7 @@ import {
   getAvailableProviderJSONs,
 } from '@railgun-community/shared-models';
 import debug from 'debug';
+import { isDefined } from '@railgun-community/quickstart';
 
 const dbg = debug('relayer:networks');
 
@@ -36,7 +37,7 @@ export const initNetworkProviders = async (chains?: RelayerChain[]) => {
  */
 const initNetworkProvider = async (chain: RelayerChain) => {
   const network = configNetworks[chain.type][chain.id];
-  if (!network) {
+  if (!isDefined(network)) {
     return;
   }
   const { fallbackProviderConfig, name } = network;
@@ -69,7 +70,7 @@ export const getProviderForNetwork = (
   chain: RelayerChain,
 ): FallbackProvider => {
   const provider = activeNetworkProviders[chain.type][chain.id];
-  if (!provider) {
+  if (!isDefined(provider)) {
     throw new Error(`No active provider for chain ${chain.type}:${chain.id}.`);
   }
   return provider;

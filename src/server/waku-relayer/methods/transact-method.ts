@@ -7,6 +7,7 @@ import {
   EncryptedData,
   getRailgunWalletPrivateViewingKey,
   getRailgunWalletAddressData,
+  isDefined,
 } from '@railgun-community/quickstart';
 import { formatJsonRpcResult } from '@walletconnect/jsonrpc-utils';
 import debug from 'debug';
@@ -147,7 +148,10 @@ export const transactMethod = async (
       );
     }
 
-    if (!configNetworks[chain.type] || !configNetworks[chain.type][chain.id]) {
+    if (
+      !isDefined(configNetworks[chain.type]) ||
+      !isDefined(configNetworks[chain.type][chain.id])
+    ) {
       return errorResponse(
         id,
         chain,
@@ -186,7 +190,7 @@ const replaceErrorMessageNonDev = (
   errMsg: string,
   devLog?: boolean,
 ): string => {
-  if (devLog) {
+  if (isDefined(devLog) && devLog) {
     return errMsg;
   }
   const knownError = errMsg as ErrorMessage;

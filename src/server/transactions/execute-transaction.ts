@@ -23,6 +23,7 @@ import { getProviderForNetwork } from '../providers/active-network-providers';
 import { createEthersWallet } from '../wallets/active-wallets';
 import { setWalletAvailability } from '../wallets/available-wallets';
 import { getBestMatchWalletForNetwork } from '../wallets/best-match-wallet';
+import { isDefined } from '@railgun-community/quickstart';
 
 const dbg = debug('relayer:transact:execute');
 
@@ -57,7 +58,7 @@ export const getCurrentNonce = async (
     wallet.getTransactionCount(blockTag).catch(throwErr),
     await getSettingsNumber(getLastNonceKey(chain, wallet)),
   ]);
-  if (lastTransactionNonce) {
+  if (isDefined(lastTransactionNonce)) {
     return Math.max(txCount, lastTransactionNonce + 1);
   }
   return txCount;
@@ -151,11 +152,12 @@ export const executeTransaction = async (
 
     setWalletAvailability(activeWallet, chain, true);
 
-    if (err?.message?.includes('Timed out')) {
+    const errMsg = err?.message as string | undefined;
+    if (isDefined(errMsg) && errMsg.includes('Timed out')) {
       throw new Error(ErrorMessage.TRANSACTION_SEND_TIMEOUT_ERROR);
     }
 
-    if (err?.message?.includes('Nonce already used')) {
+    if (isDefined(errMsg) && errMsg.includes('Nonce already used')) {
       // Try again with increased nonce.
       return executeTransaction(
         chain,

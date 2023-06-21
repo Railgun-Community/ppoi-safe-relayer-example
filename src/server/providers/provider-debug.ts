@@ -1,4 +1,5 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
+import { isDefined } from '@railgun-community/quickstart';
 import debug from 'debug';
 
 const dbg = debug('relayer:fallback-provider');
@@ -37,7 +38,7 @@ type ProviderDebugEvent = {
 };
 
 export const providerDebugListener = (debugEvent: ProviderDebugEvent) => {
-  if (debugEvent.error) {
+  if (isDefined(debugEvent.error)) {
     const info = {
       action: debugEvent.action,
       network: debugEvent.provider.network.name,

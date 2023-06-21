@@ -51,6 +51,7 @@ module.exports = {
     'no-warning-comments': 1,
     'no-only-tests/no-only-tests': 1,
     camelcase: 0,
+    '@typescript-eslint/strict-boolean-expressions': 2,
   },
   ignorePatterns: ['dist'],
 };

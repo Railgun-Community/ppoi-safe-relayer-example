@@ -2,6 +2,7 @@ import { BigNumber } from 'ethers';
 import configDefaults from '../config/config-defaults';
 import { resetMapObject } from '../../util/utils';
 import { RelayerChain } from '../../models/chain-models';
+import { isDefined } from '@railgun-community/quickstart';
 
 type CachedFees = {
   tokenFees: MapType<BigNumber>;
@@ -69,7 +70,7 @@ export const lookUpCachedUnitTokenFee = (
   transactionFeeCache[chain.type] ??= {};
   transactionFeeCache[chain.type][chain.id] ??= {};
   const cachedFees = transactionFeeCache[chain.type][chain.id][feeCacheID];
-  if (!cachedFees) {
+  if (!isDefined(cachedFees)) {
     return undefined;
   }
   if (cachedFeesExpired(cachedFees)) {

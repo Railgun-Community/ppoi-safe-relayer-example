@@ -5,8 +5,8 @@ for ((i=1; i<=2; i++)); do
     if grep -q "NODEKEY_${i}=" docker/.env; then
       echo "NODEKEY_${i} already exists in .env."
       if [ "$1" = "--set-secret" ]; then
-        echo "Setting Docker Secret for NODEKEY_${i}"
-        docker secret create NODEKEY_${i} - 0x${key}
+        echo "Setting Docker Secret for NODEKEY_${i} 0x$key"
+        echo "0x$key" | docker secret create NODEKEY_$i -
       else
         echo "Not Setting Docker Secret values, please run again with --set-secret if you havent already. Or manually set them."
       fi
@@ -16,5 +16,3 @@ for ((i=1; i<=2; i++)); do
     fi
 done
 echo ""
-
-

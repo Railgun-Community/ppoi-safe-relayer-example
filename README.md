@@ -165,8 +165,8 @@ configTokens[ChainType.EVM][NetworkChainID.Ethereum]['0x_token_address'] = {
 ##### Manual Completion Example
 
 ```sh
-docker secret create NODEKEY_1 - 0xaf46f851e0d9c2f520c89ad95d67b5d098f1d79fae2fef3f562102eca9310a66
-docker secret create NODEKEY_2 - 0xc5af820e2fb37a65470a8a7c82ba415605c83009ffcbf87916707183942bbb68
+echo "0xaf46f851e0d9c2f520c89ad95d67b5d098f1d79fae2fef3f562102eca9310a66" | docker secret create NODEKEY_1 - 
+echo "0xc5af820e2fb37a65470a8a7c82ba415605c83009ffcbf87916707183942bbb68" | docker secret create NODEKEY_2 - 
 # do not use these for your NODEKEYs
 ```
 

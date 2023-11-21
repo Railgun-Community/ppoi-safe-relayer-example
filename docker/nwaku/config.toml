@@ -10,16 +10,12 @@ rpc-admin=true
 rpc-private=true
 rpc-address='0.0.0.0'
 rpc-port=8546
-#relay-peer-exchange=false
+relay-peer-exchange=false
 #peer-exchange-node='/dns4/fleet.wecamefromapes.com/tcp/60000/p2p/16Uiu2HAkyCqm8368Z1Y1pvrBcQQtb66Mjj7uvyAKGdwur3uCbqfb'
-#peer-exchange=true
+peer-exchange=false
 #keep-alive=true
-#listen-address='0.0.0.0'
+listen-address='0.0.0.0'
 staticnode=[
-  '/dns4/dev.of.holdings/tcp/60000/p2p/16Uiu2HAmKjyaCBNtnRyyUeVefpCA88fm9TqY1XFQSnCmkLmvFh2X',
-  '/dns4/relayer.crabdance.com/tcp/60000/p2p/16Uiu2HAm9TiCU9ZRPoKMUyo6QQvZTSceSH5ZtX6u353NHgVCtr1W',
-  '/dns4/relayer.chickenkiller.com/tcp/60000/p2p/16Uiu2HAmNy49QzXVWHMdhz7DQHXCpk9sHvVua99j3QcShUK8PVSD',
-  '/dns4/relayer.of.holdings/tcp/60000/p2p/16Uiu2HAmMUjGmiUhJeiZgu6ZZnLRkE2VViR2JgjqtW9aTZnHQqgg',
   '/dns4/fleet.wecamefromapes.com/tcp/60000/p2p/16Uiu2HAkyCqm8368Z1Y1pvrBcQQtb66Mjj7uvyAKGdwur3uCbqfb',
   '/dns4/fleet.wecamefromapes.com/tcp/60001/p2p/16Uiu2HAmTCCZFbQxDNF1TL9TKSPXtfF9QJtNWhCFE5M8UNzk7DQv',
   '/dns4/fleet.wecamefromapes.com/tcp/60002/p2p/16Uiu2HAm2g9z6PyWCAe6RXXQto6ykD4EM6YH67mmQYfBQtb6ZxFi',
@@ -28,21 +24,6 @@ staticnode=[
   '/dns4/fleet.wecamefromapes.com/tcp/60005/p2p/16Uiu2HAkzkgDGEEah58RpR8ooFg3YbRhxJZ3pRZiZm3KGWreBfiw'
 ]
 dns-discovery=false
-discv5-discovery=false
-discv5-bootstrap-node=[
-  # fleet
-  'enr:-Ni4QNUg5tVpxoM2g3Xy-m5ASzZ3jjPxTJt2oeASwNa0d4gTFfGaKu4HvXgvoS-t9RWfynLzWZO-WUmG6RnGwhPD84sBgmlkgnY0gmlwhC0gpwuKbXVsdGlhZGRyc7hAAB02GGZsZWV0LndlY2FtZWZyb21hcGVzLmNvbQbqYAAfNhhmbGVldC53ZWNhbWVmcm9tYXBlcy5jb20GH0DeA4lzZWNwMjU2azGhAjglQdea_Nbq0ATBaxLcx4N9XizR4Y8Ghqs-Ksq3WBP-g3RjcILqYIV3YWt1MgE',
-  # roh
-  'enr:-Lq4QDa0zxNXjR6g_WSroaQnZDVG7FoIxhTyrvnFAhiX9GqsKAN7u4cyQDDzYnuPLzaN0gmUvZD90UsTAJ9PjDcjlMYBgmlkgnY0gmlwhKdH8B6KbXVsdGlhZGRyc5wAGjYTcmVsYXllci5vZi5ob2xkaW5ncwYfQN4DiXNlY3AyNTZrMaEDgxhTW1QQXUp6rmDAj8RflocYG0_fxiW9GnU_pzl_7XWDdGNwgupgg3VkcIIjKIV3YWt1MgE',
-  # crabdance
-  'enr:-JK4QBT-bx8uZP7cUQGcIyY9yKJfwDf4_MBw9IXnN7DcH4nPaYXz1JhdQALBvKLw8O1WqrfLfaUwLlBcIWXgJNdCihMBgmlkgnY0gmlwhF-zg3qJc2VjcDI1NmsxoQLQiUl_Ut_tI9UQR48EhPOAe73wbHrk7OZ2KBhu2DmL6YN0Y3CC6mCDdWRwgiMohXdha3UyAQ',
-  # mooo.1
-  'enr:-Mm4QBgzTiBP0DRTX2IJEddmyXDlp4ksa5Pd_U89NqFHaYfIdq0kR86R_CIyIbilTxMiLIXEpNPH5b9GtrNcjH-mfB8BgmlkgnY0gmlwhLymEG-KbXVsdGlhZGRyc7IAFjYRcmVsYXlvb3IubW9vby5jb20G6mAAGDYRcmVsYXlvb3IubW9vby5jb20GH0DeA4lzZWNwMjU2azGhA_1kEF1l8QT569PdgB4M3oz-8RT6du_I_hvcn9l5i3_bg3RjcILqYIV3YWt1MgE',
-  # mooo.2
-  'enr:-Mm4QCaldC7HjHnvB_6_Ocxwqhkycd0FKNbALd9BG3y2cchqDU4FQp6aSINa0JLm_uui0-WpdJX81fjxXe8fIHBkVJMBgmlkgnY0gmlwhLymEG-KbXVsdGlhZGRyc7IAFjYRcmVsYXlvb3IubW9vby5jb20G6mEAGDYRcmVsYXlvb3IubW9vby5jb20GH0HeA4lzZWNwMjU2azGhAw86lFAUG_eqcBrrISwvK-R2jUBjuuZtRhP7uKzPzi-Kg3RjcILqYYV3YWt1MgE'
-]
-topic=[
-  '/waku/2/railgun-relayer',
-]
+pubsub-topic=['/waku/2/railgun-relayer']
 metrics-server=false
 max-connections=300

@@ -35,7 +35,7 @@
     "@railgun-community/wallet": "6.4.0",
     "@walletconnect/jsonrpc-types": "^1.0.2",
     "@walletconnect/jsonrpc-utils": "^1.0.4",
-    "axios": "1.2.3",
+    "axios": "1.6.0",
     "debug": "^4.3.4",
     "docker-secret": "^1.2.4",
     "ethers": "github:Railgun-Community/ethers.js#v6.7.10",

@@ -4,7 +4,7 @@
 
 Example code to forward RAILGUN transactions to the blockchain. Uses the Waku messaging protocol, while guaranteeing a Private Proof Of Innocence for all transactions.
 
-`poi-safe-relayer-example` is a node.js application that receives encrypted transactions from RAILGUN wallets equipped with Private Proof Of Innocence. The Relayer example verifies, signs and forwards the transactions to the blockchain. It will broadcast fees on the tokens you configure to accept at the rates defined in the config.
+`ppoi-safe-relayer-example` is a node.js application that receives encrypted transactions from RAILGUN wallets equipped with Private Proof Of Innocence. The Relayer example verifies, signs and forwards the transactions to the blockchain. It will broadcast fees on the tokens you configure to accept at the rates defined in the config.
 
 ## Private Proof Of Innocence
 
@@ -25,6 +25,7 @@ This network runs on [Waku](https://wakunetwork.com/), a secure and decentralize
 - node 16+
 - docker, if using docker
 - jq (cli utility for parsing json)
+- At least 1GB of RAM, at least 20GB of disk space
 
 ## Configuration Options
 
@@ -38,6 +39,9 @@ git clone https://github.com/Railgun-Community/ppoi-safe-relayer-example.git
 
 # change to repo directory
 cd ppoi-safe-relayer-example
+
+# May have to do this on a VPS
+docker swarm init --advertise-addr PUT.IP.ADDR.HERE 
 
 # launch SETUP script
 ./docker/setup
